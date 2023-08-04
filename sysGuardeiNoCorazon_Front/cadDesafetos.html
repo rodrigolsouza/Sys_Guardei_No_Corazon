@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Cadastro do Desafeto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+  <body>
+    <a href = "index.html">Home</a><br/>
+    <h1>Cadastro de Desafeto</h1>
+    <h5 id="result"></h5>
+
+    <form>
+        id:<input type="hidden" name="id" id="txtCodigo"/><br/>
+      Nome:<input type="text" name="nome" id="txtNome" /><br />
+      Faixa Etaria:<input type="text" name="faixa" id="txtFaixaEtaria" /><br />
+      Altura:<input type="text" name="altura" id="txtAltura" /><br />
+      Peso:<input type="text" name="peso" id="txtPeso" /><br />
+      Grau de Convivio:<input type="text" name="GrauConvivio" id="txtGrauConvivio"/><br />
+      Descricao: <br /><textarea name="descricao" id="txtDescricao"></textarea
+      ><br />
+      <button type="submit">Cadastrar </button>
+    </form>
+
+        <script>
+            const formulario = document.forms[0];
+
+            formulario.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const envio = {};
+                envio.id=document.getElementById("txtCodigo").value;
+                envio.nome=document.getElementById("txtNome").value;
+                envio.faixaEtaria=document.getElementById("txtFaixaEtaria").value;
+                envio.altura=document.getElementById("txtAltura").value;
+                envio.peso=document.getElementById("txtPeso").value;
+                envio.grauConvivio=document.getElementById("txtGrauConvivio").value;
+                envio.descricao=document.getElementById("txtDescricao").value;
+
+                fetch("http://localhost:8092/desafeto", {
+                method: "POST",
+                body: JSON.stringify(envio),
+                headers: { "Content-type": "application/json; charset=UTF-8" },
+                })
+                .then((data) => {
+                    document.getElementById("result").innerHTML =
+                    "Cadastro Realizado com Sucesso!";
+                })
+                .catch((erro) => {
+                    document.getElementById("result").innerHTML = "Erro ao realizar cadastro!";
+                });
+
+
+            });
+        </script>
+
+  </body>
+</html>

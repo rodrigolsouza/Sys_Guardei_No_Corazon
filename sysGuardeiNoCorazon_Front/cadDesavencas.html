@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Cadastro do Desavenca</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+
+    <body>
+        <a href = "index.html">Home</a><br/>
+        <h1>Cadastro de Desavenca</h1>
+        <h5 id="result"></h5>
+
+        <form>
+            id:<input type="hidden" name="id" id="txtCodigo"/><br/>
+            Tipo:<input type="=text" name="nome" id="txtTipo" class ="form-control"/><br/>
+            violencia Fisica:<input type="text" name="violenciaFisica" id="txtViolenciaFisica" class=" form-control"/><br/>
+            Local:<input type="text" name="local" id="txtLocal" class="form-control"/><br/>
+            Descrição:<textarea name="descricao" id="txtDescricao" class="form-control"></textarea><br>
+            Data: <input type="text" name="data" id="txtData" class="form-control"/><br/>
+            Hora: <input type="text" name="hora" id="txtHora" class="form-control"/><br/>
+            ID_Desafeto:<input type="number" name="desafeto_id" id="txtDesafeto_id" class="form-control"/><br/>
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <script>
+            const formulario = document.forms[0];
+
+            if(window.location.href.split("?")[1]){
+                input=document.getElementById("txtDesafeto_id");
+                input.value=window.location.href.split("?")[1];
+                console.log(typeof(window.location.href.split("?")[1])); 
+                input.readOnly=true;
+            }
+
+            formulario.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const envio = {};
+
+                envio.id=document.getElementById("txtCodigo").value;
+                envio.tipo=document.getElementById("txtTipo").value;
+                envio.violenciaFisica=document.getElementById("txtViolenciaFisica").value;
+                envio.local=document.getElementById("txtLocal").value;
+                envio.descricao=document.getElementById("txtDescricao").value;
+                envio.data=document.getElementById("txtData").value;
+                envio.hora=document.getElementById("txtHora").value;
+                
+                if(window.location.href.split("?")[1]){
+                    envio.desafeto_id=parseInt(window.location.href.split("?")[1]);
+                    console.log(typeof(envio.desafeto_id));
+                               
+                }else{
+                    envio.desafeto_id=document.getElementById("txtDesafeto_id").value;
+                }
+
+                fetch("http://localhost:8092/desavenca/"+envio.desafeto_id, {
+                method: "POST",
+                body: JSON.stringify(envio),
+                headers: { "Content-type": "application/json; charset=UTF-8" },
+                })
+                .then((data) => {
+                    document.getElementById("result").innerHTML =
+                    "Cadastro Realizado com Sucesso!";
+                })
+                .catch((erro) => {
+                    document.getElementById("result").innerHTML = "Erro ao realizar cadastro!";
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tela desavencas por desafeto</title>
+  </head>
+  <body>
+    <center><h2>Veja aqui todas as desavencas cometidas por desafeto</h2></center>
+
+    <a href = "index.html">Home</a><br/><br/>
+
+    <div id="main"></div>
+
+    <script>
+      //receendo o parametro de outra página
+      var identificador=parseInt(window.location.href.split("?")[1]);
+
+      fetch("http://localhost:8092/desafeto/"+identificador, {
+        method: "GET",
+        headers: { "Content-type": "application/json;charset=UTF-8" },
+      })
+        .then((data) => data.json())
+        .then((json) => {
+          console.log(json);
+          const divMain = document.getElementById("main");
+
+          let s =
+          "<table class='table' border=1>"+
+          "<tr><th>Código</th><th>Nome</th><th>Faixa etaria</th><th>Altura</th><th>Peso</th><th>Grau de Convivio</th><th>Descrição</th><th>Ação</th></tr>"+
+          `<tr><td align=center>${json.id}</td><td align=center>${json.nome}</td><td align=center>${json.faixaEtaria}</td><td align=center>${json.altura}</td><td align=center>${json.peso}</td><td align=center>${json.grauConvivio}</td><td align=center>${json.descricao}</td>`+
+          `<td><button class="btn btn-primary" onclick="cadastrarRegistro(${json.id})">Adicionar Nova desavenca</button></td></tr>`+
+          "<tr></tr>"+
+          "<tr></tr>"+
+          "<tr></tr>"+
+          "<tr></tr>"+
+          "<tr></tr>"+
+          "</table>"+
+          "<table class='table' border=1>"+
+          "<tr></tr><tr><td></td><td></td><th>Desavencas:</th></tr><tr></tr>"+
+          `<tr><td></td><td></td><th>Código</th><th>Tipo</th><th>Violencia Fisica</th><th>Local</th><th>Descricao</th><th>Data</th><th>Hora</th></tr>`
+
+        json.desavencas.forEach(element => {
+            s+=
+             `<tr><td></td><td></td><td align=center>${element.id}</td><td align=center>${element.tipo}</td><td align=center>${element.violenciaFisica}</td><td align=center>${element.local}</td><td align=center>${element.descricao}</td><td align=center>${element.data}</td><td align=center>${element.hora}</td></tr>`+
+             "<tr></tr>"+
+             "<tr></tr>"+
+             "<tr></tr>"+
+             "<tr></tr>"+
+             "<tr></tr>"+
+             "<tr></tr>";
+
+                
+            });  
+          
+          
+
+          s += "</table>";
+
+          divMain.innerHTML = s;
+        })
+        .catch((err) => {
+          document.getElementById("main").innerHTML =
+            "Erro ao recuperar a lista";
+        });
+
+        async function cadastrarRegistro(id){
+    
+            window.location=`cadDesavencas.html?${id}`;
+        };
+
+
+    </script>
+  </body>
+</html>

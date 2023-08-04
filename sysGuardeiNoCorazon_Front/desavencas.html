@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desavencas cadastradas</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <center><h1>Minhas Desavenças</h1></center>
+    <a href = "index.html">Home</a><br/>
+
+    <div id="main"></div>
+
+    <div
+      class="modal fade"
+      id="modalAltera"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Alterar uma desavenca
+            </h5>
+          </div>
+          <div class="modal-body">
+            <form id="formAltera" formSubmitter="PUT">
+              <input type="hidden" name="codigo" id="txtCodigo" />
+              Tipo:<input
+                type="=text"
+                name="nome"
+                id="txtTipo"
+                class="form-control"
+              /><br />
+              violencia Fisica:<input
+                type="text"
+                name="violenciaFisica"
+                id="txtViolenciaFisica"
+                class="form-control"
+              /><br />
+              Local:<input
+                type="text"
+                name="local"
+                id="txtLocal"
+                class="form-control"
+              /><br />
+              Descrição:<textarea
+                name="descricao"
+                id="txtDescricao"
+                class="form-control"
+              ></textarea
+              ><br />
+              Data:
+              <input
+                type="text"
+                name="data"
+                id="txtData"
+                class="form-control"
+              /><br />
+              Hora:
+              <input
+                type="text"
+                name="hora"
+                id="txtHora"
+                class="form-control"
+              /><br />
+              <button type="submit" class="btn btn-primary">alterar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="desavencas.js"></script>
+    <script src="submitterDesavencas.js"></script>
+  </body>
+</html>
