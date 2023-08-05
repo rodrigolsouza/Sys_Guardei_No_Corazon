@@ -1,0 +1,27 @@
+CREATE database sysGuardeiNoCorazon;
+
+Show databases;
+
+use sysGuardeiNoCorazon;
+
+CREATE TABLE desafeto (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100),
+    faixa_etaria VARCHAR(50),
+    altura FLOAT,
+    peso FLOAT,
+    grau_convivio VARCHAR(50),
+    descricao VARCHAR(255)
+);
+
+CREATE TABLE desavenca (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  tipo VARCHAR(255),
+  violencia_fisica BOOLEAN,
+  local VARCHAR(255),
+  descricao VARCHAR(255),
+  data VARCHAR(100),
+  hora VARCHAR(100),
+  desafeto_id INT,
+  constraint fk_desavencaDesafeto FOREIGN KEY(desafeto_id) REFERENCES desafeto(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
